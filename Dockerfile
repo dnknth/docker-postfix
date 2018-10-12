@@ -8,8 +8,7 @@ RUN apk add --no-cache ca-certificates \
 COPY service /etc/service
 COPY syslog.conf /etc/syslog.conf
 
+VOLUME /etc/postfix
 STOPSIGNAL SIGKILL
-
 EXPOSE 25
-
 ENTRYPOINT ["/sbin/runsvdir", "/etc/service"]
