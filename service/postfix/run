@@ -42,5 +42,5 @@ fi
 
 newaliases
 
-exec /usr/lib/postfix/master -c /etc/postfix -d 2>&1
+exec /usr/libexec/postfix/master -c /etc/postfix -d 2>&1
 
