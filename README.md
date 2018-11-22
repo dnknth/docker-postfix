@@ -10,7 +10,7 @@ Start Postfix standalone (to send emails from containers)
 
     $ docker run --rm --name=postfix \
                  -e  MTP_HOST=foo.com \
-             dnknth/docker-postfix
+             dnknth/alpine-postfix
 
 Or use a remote relay server:
 
@@ -19,7 +19,7 @@ Or use a remote relay server:
                  -e MTP_RELAY=smtp.gmail.com \
                  -e MTP_USER=foo \
                  -e MTP_PASS=secret \
-             dnknth/docker-postfix
+             dnknth/alpine-postfix
 
 Send emails:
 
