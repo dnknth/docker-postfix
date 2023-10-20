@@ -1,6 +1,6 @@
 FROM alpine
 
-MAINTAINER "dnknth"
+LABEL org.opencontainers.image.authors="dnknth"
 
 RUN apk add --no-cache ca-certificates \
     inetutils-syslogd mailx postfix runit

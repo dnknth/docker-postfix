@@ -24,14 +24,16 @@ if [ ! -z "$MTP_RELAY_DOMAINS" ]; then
   postconf -e "relay_domains = $MTP_RELAY_DOMAINS"
 fi
 
+postconf -e 'smtp_tls_CApath = /etc/ssl/certs'
+postconf -e 'smtp_tls_security_level = may'
+postconf -e 'smtp_tls_mandatory_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1'
+
 if [ ! -z "$MTP_RELAY" -a ! -z "$MTP_PORT" -a ! -z "$MTP_USER" -a ! -z "$MTP_PASS" ]; then
-    postconf -e 'smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt'
     postconf -e "relayhost = [$MTP_RELAY]:$MTP_PORT"
     postconf -e 'smtp_sasl_auth_enable = yes'
     postconf -e 'smtp_sasl_password_maps = hash:/etc/postfix/relay_passwd'
     postconf -e 'smtp_sasl_security_options = noanonymous'
     postconf -e 'smtp_tls_security_level = encrypt'
-    postconf -e 'smtputf8_enable = no'
     postconf -e 'mynetworks = 127.0.0.0/8 172.17.0.0/16 10.42.0.0/16'
 
     echo "$MTP_RELAY   $MTP_USER:$MTP_PASS" > /etc/postfix/relay_passwd
